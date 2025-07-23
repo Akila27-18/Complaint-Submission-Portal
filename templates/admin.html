@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Admin Panel</title></head>
+<body>
+    <h2>Admin Panel</h2>
+    <p>Total Complaints: {{ total }} | Resolved: {{ resolved }}</p>
+    <ul>
+        {% for c in complaints %}
+        <li>
+            <strong>{{ c.name }}</strong>: {{ c.message }} 
+            {% if c.resolved %}
+                [Resolved]
+            {% else %}
+                <a href="{{ url_for('resolve', id=c.id) }}">Mark as Resolved</a>
+            {% endif %}
+            <a href="{{ url_for('delete', id=c.id) }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back</a>
+</body>
+</html>
